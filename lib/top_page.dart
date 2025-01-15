@@ -134,7 +134,8 @@ class _AboutMe extends StatelessWidget {
             'With experience in Flutter since 2019, in Mobile App Development since 2011, '
             'he has developed many apps for clients with his knowledge of fundamental mechanisms of the framework. \n\n '
             'He is also passionate about sharing his knowledge by writing articles, providing talks at conferences, '
-            'as well as contributing to the community by creating packages.',
+            'as well as contributing to the community by creating packages.\n\n'
+            'He is open to discuss how he might contribute as a freelancer on your upcoming projects.',
             style: TextStyle(fontSize: 20),
           ),
         ),

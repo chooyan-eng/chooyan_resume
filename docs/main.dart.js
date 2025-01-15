@@ -41106,7 +41106,7 @@ r=s.a.a.length===0?o:new A.a8g(p)
 n=A.i6(A.fe(A.b([new A.e3(B.mQ,new A.BM(s,B.GC,B.Wa,B.Vo,B.Vp,p.gaby(),!0,o),o),B.d6,new A.L4(r,o,o,o,o,o,o,!1,o,!0,o,B.a_r,o)],t.D),B.aa,B.eN,B.aQ,0),B.B,o,new A.dM(B.dg,o,o,n,o,o,B.be),o,o,o,o)}else{s=$.aDp()
 r=$.aDo()
 q=t.D
-q=A.fe(A.b([B.a_u,A.aqx(A.jE(B.bS,A.b([new A.HY(n,new A.a8h(p),new A.afg(0.5,o),p.r,r,s,o),A.iu(16,A.aqN(B.G5,new A.a8i(p),A.a2S(o,B.l,o,o,o,o,o,B.bI,o,o,o,o,o,o,o),o),o,o,o,16,o,o)],q),B.a3,B.bL))],q),B.aa,B.Z,B.aY,0)
+q=A.fe(A.b([B.a_v,A.aqx(A.jE(B.bS,A.b([new A.HY(n,new A.a8h(p),new A.afg(0.5,o),p.r,r,s,o),A.iu(16,A.aqN(B.G5,new A.a8i(p),A.a2S(o,B.l,o,o,o,o,o,B.bI,o,o,o,o,o,o,o),o),o,o,o,16,o,o)],q),B.a3,B.bL))],q),B.aa,B.Z,B.aY,0)
 n=q}n=A.b([new A.j3(1,n,o)],t.Xn)
 s=p.e
 if(s!=null){r=t.D
@@ -41257,7 +41257,7 @@ A.an8.prototype={
 $0(){this.a.e=!1},
 $S:0}
 A.Oy.prototype={
-U(a){return A.fe(A.b([new A.HF(A.JD("assets/me_photo.jpg",B.lQ,100,100),null),B.d6,B.a_v,B.bK,new A.i5(B.Bp,B.a_A,null)],t.D),B.aa,B.Z,B.aQ,0)}}
+U(a){return A.fe(A.b([new A.HF(A.JD("assets/me_photo.jpg",B.lQ,100,100),null),B.d6,B.a_w,B.bK,new A.i5(B.Bp,B.a_s,null)],t.D),B.aa,B.Z,B.aQ,0)}}
 A.OZ.prototype={
 U(a){return new A.jo(new A.afS(),null)}}
 A.afS.prototype={
@@ -41267,7 +41267,7 @@ $S:297}
 A.Sa.prototype={
 U(a){return B.E0}}
 A.VA.prototype={
-U(a){return A.fe(A.b([B.a_w,B.bK,new A.jo(new A.ant(),null)],t.D),B.aa,B.Z,B.aQ,0)}}
+U(a){return A.fe(A.b([B.a_x,B.bK,new A.jo(new A.ant(),null)],t.D),B.aa,B.Z,B.aQ,0)}}
 A.ant.prototype={
 $2(a,b){return b.b>900?B.Te:B.E1},
 $S:300}
@@ -41290,7 +41290,7 @@ r===$&&A.a()
 return A.fe(A.b([new A.Cn(r,1.7777777777777777,s),A.l1(this.a.d,s,s,s,s,s,s)],t.D),B.aa,B.Z,B.aQ,0)}}
 A.Ui.prototype={
 U(a){var s=null,r="assets/logo_x.png",q=t.D
-return A.fe(A.b([B.a_x,B.bK,A.fe(A.b([A.ud(A.b([A.JD("assets/logo_github.png",s,24,24),B.dQ,B.H3],q),B.Z,B.aY,0),A.ud(A.b([A.JD(r,s,24,24),B.dQ,B.GX],q),B.Z,B.aY,0),A.ud(A.b([A.JD(r,s,24,24),B.dQ,B.GY],q),B.Z,B.aY,0),A.ud(A.b([new A.HO(B.Fg,A.JD("assets/logo_linkedin.png",s,24,24),s),B.dQ,B.H4],q),B.Z,B.aY,0),B.H7],q),B.bW,B.Z,B.aY,0)],q),B.aa,B.Z,B.aQ,0)}}
+return A.fe(A.b([B.a_y,B.bK,A.fe(A.b([A.ud(A.b([A.JD("assets/logo_github.png",s,24,24),B.dQ,B.H3],q),B.Z,B.aY,0),A.ud(A.b([A.JD(r,s,24,24),B.dQ,B.GX],q),B.Z,B.aY,0),A.ud(A.b([A.JD(r,s,24,24),B.dQ,B.GY],q),B.Z,B.aY,0),A.ud(A.b([new A.HO(B.Fg,A.JD("assets/logo_linkedin.png",s,24,24),s),B.dQ,B.H4],q),B.Z,B.aY,0),B.H7],q),B.bW,B.Z,B.aY,0)],q),B.aa,B.Z,B.aQ,0)}}
 A.Ig.prototype={
 lL(a,b){return J.c(a,b)},
 iS(a){return J.v(a)}}
@@ -95259,10 +95259,10 @@ B.CB=new A.VH()
 B.CC=new A.anG()
 B.ma=new A.anH()
 B.CG=new A.wV(null,null,null,null,null,null,null)
-B.a_z=new A.ez("Try drag/drop and reordering!",null,null,null,null,null,null,null,null)
-B.CH=new A.k5(B.ah,null,null,B.a_z,null)
-B.a_s=new A.ez("Draw whatever you want!",null,null,null,null,null,null,null,null)
-B.CI=new A.k5(B.ah,null,null,B.a_s,null)
+B.a_A=new A.ez("Try drag/drop and reordering!",null,null,null,null,null,null,null,null)
+B.CH=new A.k5(B.ah,null,null,B.a_A,null)
+B.a_t=new A.ez("Draw whatever you want!",null,null,null,null,null,null,null,null)
+B.CI=new A.k5(B.ah,null,null,B.a_t,null)
 B.mb=new A.YJ(4,"luminance")
 B.CJ=new A.wW(null,null,null,null,null,null,null,null,null)
 B.CK=new A.wX(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
@@ -95365,7 +95365,7 @@ B.aa=new A.o2(2,"center")
 B.bQ=new A.aeU(1,"down")
 B.cJ=new A.hq(6)
 B.fa=new A.o(!0,null,null,null,null,null,24,B.cJ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.a_y=new A.ez("Flutter Packages",null,B.fa,null,null,null,null,null,null)
+B.a_z=new A.ez("Flutter Packages",null,B.fa,null,null,null,null,null,null)
 B.bK=new A.ex(null,8,null,null)
 B.aY=new A.KA(0,"min")
 B.H_=new A.et("crop_your_image","https://pub.dev/packages/crop_your_image",null)
@@ -95375,10 +95375,10 @@ B.O7=A.b(s([B.H_,B.H6,B.H5]),t.D)
 B.Tf=new A.uc(B.aD,B.Z,B.aY,B.aa,null,B.bQ,null,16,B.O7,null)
 B.Vi=new A.ex(null,32,null,null)
 B.Yh=new A.o(!0,null,null,null,null,null,20,B.cJ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.a_t=new A.ez("Try them out!",null,B.Yh,null,null,null,null,null,null)
+B.a_u=new A.ez("Try them out!",null,B.Yh,null,null,null,null,null,null)
 B.d6=new A.ex(null,16,null,null)
 B.RS=new A.zL(null)
-B.OH=A.b(s([B.a_y,B.bK,B.Tf,B.Vi,B.a_t,B.d6,B.RS]),t.D)
+B.OH=A.b(s([B.a_z,B.bK,B.Tf,B.Vi,B.a_u,B.d6,B.RS]),t.D)
 B.E0=new A.k8(B.aE,B.Z,B.aQ,B.aa,null,B.bQ,null,0,B.OH,null)
 B.AJ=new A.w3("zJpnP6gG3T8","Maximizing the Power of the Widget Tree",null)
 B.Vj=new A.ex(null,60,null,null)
@@ -98143,12 +98143,12 @@ B.Z5=new A.o(!0,B.l,null,"Roboto",null,null,null,null,null,null,null,null,null,n
 B.a_p=new A.dk(B.Zj,B.X0,B.XV,B.ZC,B.WK,B.WJ,B.Wj,B.Z3,B.ZQ,B.WL,B.Xb,B.YX,B.Ww,B.a_2,B.Z5)
 B.a_q=new A.ez("Articles",null,B.fa,null,null,null,null,null,null)
 B.a_r=new A.ez("Start",null,null,null,null,null,null,null,null)
-B.a_u=new A.ez("crop your image!",null,null,null,null,null,null,null,null)
-B.a_v=new A.ez("About Tsuyoshi Chujo",null,B.fa,null,null,null,null,null,null)
-B.a_w=new A.ez("Videos",null,B.fa,null,null,null,null,null,null)
-B.a_x=new A.ez("Socials / Email",null,B.fa,null,null,null,null,null,null)
 B.Yx=new A.o(!0,null,null,null,null,null,20,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.a_A=new A.ez("Tsuyoshi Chujo, or Chooyan, is a freelance Flutter developer based in Japan. \n\nWith experience in Flutter since 2019, in Mobile App Development since 2011, he has developed many apps for clients with his knowledge of fundamental mechanisms of the framework. \n\n He is also passionate about sharing his knowledge by writing articles, providing talks at conferences, as well as contributing to the community by creating packages.",null,B.Yx,null,null,null,null,null,null)
+B.a_s=new A.ez("Tsuyoshi Chujo, or Chooyan, is a freelance Flutter developer based in Japan. \n\nWith experience in Flutter since 2019, in Mobile App Development since 2011, he has developed many apps for clients with his knowledge of fundamental mechanisms of the framework. \n\n He is also passionate about sharing his knowledge by writing articles, providing talks at conferences, as well as contributing to the community by creating packages.\n\nHe is open to discuss how he might contribute as a freelancer on your upcoming projects.",null,B.Yx,null,null,null,null,null,null)
+B.a_v=new A.ez("crop your image!",null,null,null,null,null,null,null,null)
+B.a_w=new A.ez("About Tsuyoshi Chujo",null,B.fa,null,null,null,null,null,null)
+B.a_x=new A.ez("Videos",null,B.fa,null,null,null,null,null,null)
+B.a_y=new A.ez("Socials / Email",null,B.fa,null,null,null,null,null,null)
 B.a3A=new A.ae8(0,"system")
 B.Rz=new A.i(0.05,0)
 B.RA=new A.i(0.133333,0.06)
