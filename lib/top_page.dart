@@ -346,7 +346,7 @@ class _Socials extends StatelessWidget {
     return Column(
       children: [
         const Text(
-          'GitHub / SNS',
+          'Socials / Email',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
@@ -404,6 +404,10 @@ class _Socials extends StatelessWidget {
                   url: 'https://www.linkedin.com/in/chooyani18n/',
                 ),
               ],
+            ),
+            const LinkText(
+              text: 'chooyan.engineer@gmail.com',
+              url: 'mailto:chooyan.engineer@gmail.com',
             ),
           ],
         ),

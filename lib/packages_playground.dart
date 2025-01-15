@@ -287,10 +287,9 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
                       ),
                     );
                     return AnimatedTo(
-                      duration: const Duration(milliseconds: 200),
                       globalKey: GlobalObjectKey(doneImage),
                       curve: Curves.easeInOut,
-                      slidingFrom: const Offset(-100, 100),
+                      slidingFrom: const Offset(-40, 40),
                       child: Draggable<Uint8List>(
                         data: doneImage,
                         feedback: Material(

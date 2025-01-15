@@ -13,10 +13,10 @@ class LinkText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: GestureDetector(
-        onTap: () => _launchURL(url),
+    return GestureDetector(
+      onTap: () => _launchURL(url),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Text(
           text,
           style: const TextStyle(
