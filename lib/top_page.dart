@@ -28,75 +28,80 @@ class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) {
     final scrollController = PrimaryScrollController.of(context);
-    return NotificationListener<ScrollStartNotification>(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          controller: scrollController,
-          physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.all(16.0),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 32,
-                children: [
-                  AnimatedAppearing(
-                    globalKey: const GlobalObjectKey('about_me'),
-                    isVisible: _isVisible,
-                    delayIndex: 0,
-                    animationEnabled: _animationEnabled,
-                    child: const _AboutMe(),
-                  ),
-                  const SizedBox(height: 16),
-                  AnimatedAppearing(
-                    globalKey: const GlobalObjectKey('articles'),
-                    isVisible: _isVisible,
-                    delayIndex: 1,
-                    animationEnabled: _animationEnabled,
-                    child: const _Articles(),
-                  ),
-                  const SizedBox(height: 16),
-                  AnimatedAppearing(
-                    globalKey: const GlobalObjectKey('packages'),
-                    isVisible: _isVisible,
-                    delayIndex: 2,
-                    animationEnabled: _animationEnabled,
-                    child: const _Packages(),
-                  ),
-                  const SizedBox(height: 16),
-                  AnimatedAppearing(
-                    globalKey: const GlobalObjectKey('socials'),
-                    isVisible: _isVisible,
-                    delayIndex: 3,
-                    animationEnabled: _animationEnabled,
-                    child: const _Socials(),
-                    onEnd: () {
-                      Future.delayed(
-                        const Duration(milliseconds: 1000),
-                        () {
-                          setState(() {
-                            _animationEnabled = false;
-                          });
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  AnimatedAppearing(
-                    globalKey: const GlobalObjectKey('videos'),
-                    isVisible: _isVisible,
-                    delayIndex: 4,
-                    animationEnabled: _animationEnabled,
-                    child: const _Videos(),
-                  ),
-                ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        return Scaffold(
+          body: SingleChildScrollView(
+            controller: scrollController,
+            physics: const ClampingScrollPhysics(),
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: width > 600 ? 60 : 16,
+                  vertical: 32,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 32,
+                  children: [
+                    AnimatedAppearing(
+                      globalKey: const GlobalObjectKey('about_me'),
+                      isVisible: _isVisible,
+                      delayIndex: 0,
+                      animationEnabled: _animationEnabled,
+                      child: const _AboutMe(),
+                    ),
+                    const SizedBox(height: 16),
+                    AnimatedAppearing(
+                      globalKey: const GlobalObjectKey('articles'),
+                      isVisible: _isVisible,
+                      delayIndex: 1,
+                      animationEnabled: _animationEnabled,
+                      child: const _Articles(),
+                    ),
+                    const SizedBox(height: 16),
+                    AnimatedAppearing(
+                      globalKey: const GlobalObjectKey('packages'),
+                      isVisible: _isVisible,
+                      delayIndex: 2,
+                      animationEnabled: _animationEnabled,
+                      child: const _Packages(),
+                    ),
+                    const SizedBox(height: 16),
+                    AnimatedAppearing(
+                      globalKey: const GlobalObjectKey('socials'),
+                      isVisible: _isVisible,
+                      delayIndex: 3,
+                      animationEnabled: _animationEnabled,
+                      child: const _Socials(),
+                      onEnd: () {
+                        Future.delayed(
+                          const Duration(milliseconds: 1000),
+                          () {
+                            setState(() {
+                              _animationEnabled = false;
+                            });
+                          },
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    AnimatedAppearing(
+                      globalKey: const GlobalObjectKey('videos'),
+                      isVisible: _isVisible,
+                      delayIndex: 4,
+                      animationEnabled: _animationEnabled,
+                      child: const _Videos(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -143,55 +148,62 @@ class _Articles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text(
-          'Articles',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 16),
-          decoration: BoxDecoration(
-            color: Colors.blue.shade900.withAlpha(100), // Darker background
-            border: Border.all(color: Colors.blue.shade700), // Darker border
-            borderRadius: BorderRadius.circular(8.0),
+    return LayoutBuilder(builder: (context, constraints) {
+      final width = constraints.maxWidth;
+      return Column(
+        children: [
+          const Text(
+            'Articles',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              LinkText(
-                text: 'All I Know about Layout Calculation',
-                url:
-                    'https://chooyan.hashnode.dev/all-i-know-about-layout-calculation',
-              ),
-              SizedBox(height: 8),
-              LinkText(
-                text: 'All I Know about BuildContext',
-                url:
-                    'https://chooyan.hashnode.dev/all-i-know-about-buildcontext',
-              ),
-              SizedBox(height: 8),
-              LinkText(
-                text: 'All I Know about GlobalKey',
-                url: 'https://chooyan.hashnode.dev/all-i-know-about-globalkey',
-              ),
-              SizedBox(height: 8),
-              LinkText(
-                text: 'Why We Need AsyncValue of Riverpod',
-                url:
-                    'https://chooyan.hashnode.dev/why-we-need-asyncvalue-of-riverpod',
-              ),
-              SizedBox(height: 8),
-              LinkText(
-                text: '...And more',
-                url: 'https://chooyan.hashnode.dev/',
-              ),
-            ],
+          const SizedBox(height: 8),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: width > 600 ? 60 : 24,
+              vertical: 16,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade900.withAlpha(100), // Darker background
+              border: Border.all(color: Colors.blue.shade700), // Darker border
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LinkText(
+                  text: 'All I Know about Layout Calculation',
+                  url:
+                      'https://chooyan.hashnode.dev/all-i-know-about-layout-calculation',
+                ),
+                SizedBox(height: 8),
+                LinkText(
+                  text: 'All I Know about BuildContext',
+                  url:
+                      'https://chooyan.hashnode.dev/all-i-know-about-buildcontext',
+                ),
+                SizedBox(height: 8),
+                LinkText(
+                  text: 'All I Know about GlobalKey',
+                  url:
+                      'https://chooyan.hashnode.dev/all-i-know-about-globalkey',
+                ),
+                SizedBox(height: 8),
+                LinkText(
+                  text: 'Why We Need AsyncValue of Riverpod',
+                  url:
+                      'https://chooyan.hashnode.dev/why-we-need-asyncvalue-of-riverpod',
+                ),
+                SizedBox(height: 8),
+                LinkText(
+                  text: '...And more',
+                  url: 'https://chooyan.hashnode.dev/',
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }
 
