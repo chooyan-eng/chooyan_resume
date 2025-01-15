@@ -237,7 +237,10 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
                                 final bytes = await imageBytes.toByteData(
                                     format: ImageByteFormat.png);
                                 setState(() {
-                                  _doneImages.add(bytes!.buffer.asUint8List());
+                                  _doneImages.insert(
+                                    0,
+                                    bytes!.buffer.asUint8List(),
+                                  );
                                 });
                               },
                               icon: const Icon(Icons.done),
@@ -287,6 +290,7 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
                       duration: const Duration(milliseconds: 200),
                       globalKey: GlobalObjectKey(doneImage),
                       curve: Curves.easeInOut,
+                      slidingFrom: const Offset(-100, 100),
                       child: Draggable<Uint8List>(
                         data: doneImage,
                         feedback: Material(
