@@ -24,7 +24,7 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
   final _drawController = DrawController();
   final _textEditingController = TextEditingController();
 
-  var _color = Colors.black;
+  var _color = Colors.blue;
   var _strokeWidth = 4.0;
   final _canvasKey = GlobalKey();
 
@@ -94,6 +94,10 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
                         Crop(
                           image: _image!,
                           controller: _cropController,
+                          initialRectBuilder:
+                              InitialRectBuilder.withSizeAndRatio(
+                            size: 0.5,
+                          ),
                           onCropped: (result) {
                             setState(() {
                               _croppedImage = switch (result) {
@@ -111,6 +115,10 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
                             onPressed: () {
                               _cropController.crop();
                             },
+                            style: IconButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.blue,
+                            ),
                             icon: const Icon(Icons.crop),
                           ),
                         )
@@ -156,77 +164,87 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
                       ),
                     ),
                     Positioned(
-                      bottom: 16,
+                      bottom: 0,
                       left: 0,
                       right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {
-                              setState(() {
-                                _color = Colors.black;
-                              });
-                            },
-                            icon: const Icon(Icons.circle, color: Colors.black),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _color = Colors.red;
-                              });
-                            },
-                            icon: const Icon(Icons.circle, color: Colors.red),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _color = Colors.blue;
-                              });
-                            },
-                            icon: const Icon(Icons.circle, color: Colors.blue),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _color = Colors.green;
-                              });
-                            },
-                            icon: const Icon(Icons.circle, color: Colors.green),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Slider(
-                              value: _strokeWidth,
-                              min: 1,
-                              max: 20,
-                              onChanged: (value) {
+                      child: ColoredBox(
+                        color: Colors.black.withAlpha(100),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    spacing: 16,
+                                    children: [
+                                      const SizedBox(width: 16),
+                                      _ColorSelector(
+                                        color: Colors.blue,
+                                        onTap: () => setState(
+                                            () => _color = Colors.blue),
+                                        isSelected: _color == Colors.blue,
+                                        strokeWidth: _strokeWidth,
+                                      ),
+                                      _ColorSelector(
+                                        color: Colors.red,
+                                        onTap: () =>
+                                            setState(() => _color = Colors.red),
+                                        isSelected: _color == Colors.red,
+                                        strokeWidth: _strokeWidth,
+                                      ),
+                                      _ColorSelector(
+                                        color: Colors.green,
+                                        onTap: () => setState(
+                                            () => _color = Colors.green),
+                                        isSelected: _color == Colors.green,
+                                        strokeWidth: _strokeWidth,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Slider(
+                                      value: _strokeWidth,
+                                      min: 1,
+                                      max: 20,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _strokeWidth = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            IconButton(
+                              style: IconButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.blue,
+                              ),
+                              onPressed: () async {
+                                _drawController.clear();
+                                final image = _canvasKey.currentContext
+                                        ?.findRenderObject()
+                                    as RenderRepaintBoundary?;
+                                if (image == null) return;
+                                final imageBytes =
+                                    await image.toImage(pixelRatio: 3);
+                                final bytes = await imageBytes.toByteData(
+                                    format: ImageByteFormat.png);
                                 setState(() {
-                                  _strokeWidth = value;
+                                  _doneImages.add(bytes!.buffer.asUint8List());
                                 });
                               },
+                              icon: const Icon(Icons.done),
                             ),
-                          ),
-                          const SizedBox(width: 16),
-                          IconButton(
-                            onPressed: () async {
-                              _drawController.clear();
-                              final image =
-                                  _canvasKey.currentContext?.findRenderObject()
-                                      as RenderRepaintBoundary?;
-                              if (image == null) return;
-                              final imageBytes =
-                                  await image.toImage(pixelRatio: 3);
-                              final bytes = await imageBytes.toByteData(
-                                  format: ImageByteFormat.png);
-                              setState(() {
-                                _doneImages.add(bytes!.buffer.asUint8List());
-                              });
-                            },
-                            icon: const Icon(Icons.done),
-                          ),
-                        ],
+                            const SizedBox(width: 8),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -333,6 +351,46 @@ class PackagesPlaygroundState extends State<PackagesPlayground> {
                 ),
               );
       },
+    );
+  }
+}
+
+class _ColorSelector extends StatelessWidget {
+  const _ColorSelector({
+    required this.color,
+    required this.onTap,
+    required this.isSelected,
+    required this.strokeWidth,
+  });
+
+  final Color color;
+  final VoidCallback onTap;
+  final bool isSelected;
+  final double strokeWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 24,
+        height: 24,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          border: isSelected ? Border.all(color: color, width: 2) : null,
+        ),
+        child: Center(
+          child: Container(
+            width: strokeWidth,
+            height: strokeWidth,
+            decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

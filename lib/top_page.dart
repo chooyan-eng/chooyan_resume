@@ -265,9 +265,7 @@ class _Videos extends StatelessWidget {
                     children: [
                       Expanded(child: video1),
                       SizedBox(width: 60),
-                      Expanded(
-                        child: video2,
-                      ),
+                      Expanded(child: video2),
                     ],
                   )
                 : const Column(
