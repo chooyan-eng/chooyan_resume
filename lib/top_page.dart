@@ -1,15 +1,8 @@
-import 'dart:typed_data';
-import 'dart:ui';
-
-import 'package:animated_to/animated_to.dart';
 import 'package:chooyan_resume/animated_appearing.dart';
 import 'package:chooyan_resume/link_text.dart';
-import 'package:crop_your_image/crop_your_image.dart';
-import 'package:draw_your_image/draw_your_image.dart';
+import 'package:chooyan_resume/packages_playground.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:http/http.dart' as http;
 
 class TopPage extends StatefulWidget {
   const TopPage({super.key});
@@ -125,17 +118,20 @@ class _AboutMe extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Text(
-          'About Chooyan',
+          'About Tsuyoshi Chujo',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        const Text(
-          'Tsuyoshi Chujo, or Chooyan, is a freelance Flutter developer based in Japan. '
-          'With experience in Flutter since 2019, in Mobile App Development since 2011, '
-          'he has developed many apps for clients with his knowledge of fundamental mechanisms of the framework. '
-          'He is also passionate about sharing his knowledge by writing articles, providing talks at conferences, '
-          'as well as contributing to the community by creating packages.',
-          style: TextStyle(fontSize: 16),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 800),
+          child: const Text(
+            'Tsuyoshi Chujo, or Chooyan, is a freelance Flutter developer based in Japan. \n\n'
+            'With experience in Flutter since 2019, in Mobile App Development since 2011, '
+            'he has developed many apps for clients with his knowledge of fundamental mechanisms of the framework. \n\n '
+            'He is also passionate about sharing his knowledge by writing articles, providing talks at conferences, '
+            'as well as contributing to the community by creating packages.',
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ],
     );
@@ -211,17 +207,23 @@ class _Packages extends StatelessWidget {
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
-        LinkText(
-          text: 'crop_your_image',
-          url: 'https://pub.dev/packages/crop_your_image',
-        ),
-        LinkText(
-          text: 'animated_to',
-          url: 'https://pub.dev/packages/animated_to',
-        ),
-        LinkText(
-          text: 'draw_your_image',
-          url: 'https://pub.dev/packages/draw_your_image',
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            LinkText(
+              text: 'crop_your_image',
+              url: 'https://pub.dev/packages/crop_your_image',
+            ),
+            LinkText(
+              text: 'animated_to',
+              url: 'https://pub.dev/packages/animated_to',
+            ),
+            LinkText(
+              text: 'draw_your_image',
+              url: 'https://pub.dev/packages/draw_your_image',
+            ),
+          ],
         ),
         SizedBox(height: 32),
         Text(
@@ -229,293 +231,8 @@ class _Packages extends StatelessWidget {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 16),
-        _PackagesPlayground(),
+        PackagesPlayground(),
       ],
-    );
-  }
-}
-
-class _PackagesPlayground extends StatefulWidget {
-  const _PackagesPlayground();
-
-  @override
-  State<_PackagesPlayground> createState() => _PackagesPlaygroundState();
-}
-
-class _PackagesPlaygroundState extends State<_PackagesPlayground> {
-  Uint8List? _image;
-  Uint8List? _croppedImage;
-  List<Uint8List> _doneImages = [];
-
-  final _cropController = CropController();
-  final _drawController = DrawController();
-  final _textEditingController = TextEditingController();
-
-  var _color = Colors.black;
-  var _strokeWidth = 1.0;
-  final _canvasKey = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-    _textEditingController.addListener(() => setState(() {}));
-  }
-
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _load(String url) async {
-    final response = await http.get(Uri.parse(url));
-    setState(() {
-      _image = response.bodyBytes;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
-      width: double.infinity,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 32,
-        children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: _image == null
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade700,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: TextField(
-                            controller: _textEditingController,
-                            decoration: const InputDecoration(
-                              hintText: 'Enter image URL',
-                              border: OutlineInputBorder(),
-                            ),
-                            onSubmitted: _load,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        OutlinedButton(
-                          onPressed: _textEditingController.text.isEmpty
-                              ? null
-                              : () {
-                                  _load(_textEditingController.text);
-                                },
-                          child: const Text('Start'),
-                        ),
-                      ],
-                    ),
-                  )
-                : Stack(
-                    children: [
-                      Crop(
-                        image: _image!,
-                        controller: _cropController,
-                        onCropped: (result) {
-                          setState(() {
-                            _croppedImage = switch (result) {
-                              CropSuccess(:final croppedImage) => croppedImage,
-                              CropFailure() => null,
-                            };
-                          });
-                        },
-                      ),
-                      Positioned(
-                        right: 16,
-                        bottom: 16,
-                        child: IconButton(
-                          onPressed: () {
-                            _cropController.crop();
-                          },
-                          icon: const Icon(Icons.crop),
-                        ),
-                      )
-                    ],
-                  ),
-          ),
-          if (_croppedImage != null)
-            AspectRatio(
-              aspectRatio: 1,
-              child: Stack(
-                children: [
-                  RepaintBoundary(
-                    key: _canvasKey,
-                    child: Stack(
-                      children: [
-                        SizedBox.expand(
-                          child: Container(
-                            color: Colors.white,
-                            child: Image.memory(
-                              _croppedImage!,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                        Positioned.fill(
-                          child: Draw(
-                            backgroundColor: Colors.transparent,
-                            controller: _drawController,
-                            strokeColor: _color,
-                            strokeWidth: _strokeWidth,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 16,
-                    left: 0,
-                    right: 0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            setState(() {
-                              _color = Colors.black;
-                            });
-                          },
-                          icon: const Icon(Icons.circle, color: Colors.black),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _color = Colors.red;
-                            });
-                          },
-                          icon: const Icon(Icons.circle, color: Colors.red),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _color = Colors.blue;
-                            });
-                          },
-                          icon: const Icon(Icons.circle, color: Colors.blue),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _color = Colors.green;
-                            });
-                          },
-                          icon: const Icon(Icons.circle, color: Colors.green),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Slider(
-                            value: _strokeWidth,
-                            min: 1,
-                            max: 20,
-                            onChanged: (value) {
-                              setState(() {
-                                _strokeWidth = value;
-                              });
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        IconButton(
-                          onPressed: () async {
-                            final image = _canvasKey.currentContext
-                                ?.findRenderObject() as RenderRepaintBoundary?;
-                            if (image == null) return;
-                            final imageBytes =
-                                await image.toImage(pixelRatio: 3);
-                            final bytes = await imageBytes.toByteData(
-                                format: ImageByteFormat.png);
-                            setState(() {
-                              _doneImages.add(bytes!.buffer.asUint8List());
-                            });
-                          },
-                          icon: const Icon(Icons.done),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          if (_doneImages.isNotEmpty)
-            Expanded(
-              child: SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: Wrap(
-                  alignment: WrapAlignment.start,
-                  runAlignment: WrapAlignment.start,
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: List.generate(
-                    _doneImages.length,
-                    (index) {
-                      final doneImage = _doneImages[index];
-                      const size = 80.0;
-                      final child = ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: SizedBox(
-                          width: size,
-                          height: size,
-                          child: Image.memory(
-                            doneImage,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                      return AnimatedTo(
-                        duration: const Duration(milliseconds: 200),
-                        globalKey: GlobalObjectKey(doneImage),
-                        curve: Curves.easeInOut,
-                        child: Draggable<Uint8List>(
-                          data: doneImage,
-                          feedback: Material(
-                            color: Colors.transparent,
-                            child: child,
-                          ),
-                          childWhenDragging: const SizedBox(
-                            width: size,
-                            height: size,
-                          ),
-                          child: DragTarget<Uint8List>(
-                            builder: (context, _, __) => child,
-                            onWillAcceptWithDetails: (details) {
-                              if (details.data == doneImage) {
-                                return false;
-                              }
-                              setState(() {
-                                final fromIndex =
-                                    _doneImages.indexOf(details.data);
-                                final toIndex = index;
-
-                                final temp = _doneImages[fromIndex];
-                                _doneImages[fromIndex] = _doneImages[toIndex];
-                                _doneImages[toIndex] = temp;
-                              });
-                              return true;
-                            },
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
     );
   }
 }
@@ -525,29 +242,42 @@ class _Videos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    const video1 = _VideoItem(
+      videoId: 'zJpnP6gG3T8',
+      title: 'Maximizing the Power of the Widget Tree',
+    );
+    const video2 = _VideoItem(
+      videoId: 'Xitie4TrnPo',
+      title: '体験！マクロ時代のFlutterアプリ開発 (Japanese)',
+    );
+    return Column(
       children: [
-        Text(
+        const Text(
           'Videos',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(
-              child: _VideoItem(
-                videoId: 'zJpnP6gG3T8',
-                title: 'Maximizing the Power of the Widget Tree',
-              ),
-            ),
-            SizedBox(width: 60),
-            Expanded(
-              child: _VideoItem(
-                videoId: 'Xitie4TrnPo',
-                title: '体験！マクロ時代のFlutterアプリ開発 (Japanese)',
-              ),
-            ),
-          ],
+        const SizedBox(height: 8),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            return width > 900
+                ? const Row(
+                    children: [
+                      Expanded(child: video1),
+                      SizedBox(width: 60),
+                      Expanded(
+                        child: video2,
+                      ),
+                    ],
+                  )
+                : const Column(
+                    children: [
+                      video1,
+                      SizedBox(height: 60),
+                      video2,
+                    ],
+                  );
+          },
         ),
       ],
     );
