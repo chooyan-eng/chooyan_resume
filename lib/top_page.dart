@@ -263,6 +263,14 @@ class _Videos extends StatelessWidget {
       videoId: 'Xitie4TrnPo',
       title: '体験！マクロ時代のFlutterアプリ開発 (Japanese)',
     );
+    const video3 = _VideoItem(
+      videoId: '1-IBajfcu1U',
+      title: 'AnimatedTo: A Game Changer for Your Moving Animations',
+    );
+    const video4 = _VideoItem(
+      videoId: '2pb-fNof-7M',
+      title: 'RenderObject とは何か？animated_to に学ぶレイアウト計算と描画の仕組み',
+    );
     return Column(
       children: [
         const Text(
@@ -274,11 +282,23 @@ class _Videos extends StatelessWidget {
           builder: (context, constraints) {
             final width = constraints.maxWidth;
             return width > 900
-                ? const Row(
+                ? const Column(
                     children: [
-                      Expanded(child: video1),
-                      SizedBox(width: 60),
-                      Expanded(child: video2),
+                      Row(
+                        children: [
+                          Expanded(child: video1),
+                          SizedBox(width: 60),
+                          Expanded(child: video2),
+                        ],
+                      ),
+                      SizedBox(height: 60),
+                      Row(
+                        children: [
+                          Expanded(child: video3),
+                          SizedBox(width: 60),
+                          Expanded(child: video4),
+                        ],
+                      ),
                     ],
                   )
                 : const Column(
@@ -286,6 +306,10 @@ class _Videos extends StatelessWidget {
                       video1,
                       SizedBox(height: 60),
                       video2,
+                      SizedBox(height: 60),
+                      video3,
+                      SizedBox(height: 60),
+                      video4,
                     ],
                   );
           },
