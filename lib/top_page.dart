@@ -213,38 +213,72 @@ class _Packages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    const packageLink1 = LinkText(
+      text: 'crop_your_image',
+      url: 'https://pub.dev/packages/crop_your_image',
+    );
+    const packageLink2 = LinkText(
+      text: 'animated_to',
+      url: 'https://pub.dev/packages/animated_to',
+    );
+    const packageLink3 = LinkText(
+      text: 'gesture_recorder',
+      url: 'https://pub.dev/packages/gesture_recorder',
+    );
+    const packageLink4 = LinkText(
+      text: 'draw_your_image',
+      url: 'https://pub.dev/packages/draw_your_image',
+    );
+    return Column(
       children: [
-        Text(
+        const Text(
           'Flutter Packages',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 8),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 16,
-          children: [
-            LinkText(
-              text: 'crop_your_image',
-              url: 'https://pub.dev/packages/crop_your_image',
-            ),
-            LinkText(
-              text: 'animated_to',
-              url: 'https://pub.dev/packages/animated_to',
-            ),
-            LinkText(
-              text: 'draw_your_image',
-              url: 'https://pub.dev/packages/draw_your_image',
-            ),
-          ],
+        const SizedBox(height: 8),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            return width > 900
+                ? const Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 16,
+                        children: [
+                          packageLink1,
+                          packageLink2,
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 16,
+                        children: [
+                          packageLink3,
+                          packageLink4,
+                        ],
+                      ),
+                    ],
+                  )
+                : const Column(
+                    spacing: 16,
+                    children: [
+                      packageLink1,
+                      packageLink2,
+                      packageLink3,
+                      packageLink4,
+                    ],
+                  );
+          },
         ),
-        SizedBox(height: 32),
-        Text(
+        const SizedBox(height: 32),
+        const Text(
           'Try them out!',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 16),
-        PackagesPlayground(),
+        const SizedBox(height: 16),
+        const PackagesPlayground(),
       ],
     );
   }
