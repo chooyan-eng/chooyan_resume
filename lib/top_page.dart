@@ -222,12 +222,12 @@ class _Packages extends StatelessWidget {
       url: 'https://pub.dev/packages/animated_to',
     );
     const packageLink3 = LinkText(
-      text: 'draw_your_image',
-      url: 'https://pub.dev/packages/draw_your_image',
-    );
-    const packageLink4 = LinkText(
       text: 'gesture_recorder',
       url: 'https://pub.dev/packages/gesture_recorder',
+    );
+    const packageLink4 = LinkText(
+      text: 'draw_your_image',
+      url: 'https://pub.dev/packages/draw_your_image',
     );
     return Column(
       children: [
