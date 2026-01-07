@@ -196,6 +196,12 @@ class _Articles extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 LinkText(
+                  text: 'All I Know about AnimationController',
+                  url:
+                      'https://chooyan.hashnode.dev/all-i-know-about-animationcontroller',
+                ),
+                SizedBox(height: 8),
+                LinkText(
                   text: '...And more',
                   url: 'https://chooyan.hashnode.dev/',
                 ),
