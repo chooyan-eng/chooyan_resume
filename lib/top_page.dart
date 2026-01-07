@@ -172,6 +172,12 @@ class _Articles extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LinkText(
+                  text: 'All I Know about AnimationController',
+                  url:
+                      'https://chooyan.hashnode.dev/all-i-know-about-animationcontroller',
+                ),
+                SizedBox(height: 8),
+                LinkText(
                   text: 'All I Know about Layout Calculation',
                   url:
                       'https://chooyan.hashnode.dev/all-i-know-about-layout-calculation',
@@ -193,12 +199,6 @@ class _Articles extends StatelessWidget {
                   text: 'Why We Need AsyncValue of Riverpod',
                   url:
                       'https://chooyan.hashnode.dev/why-we-need-asyncvalue-of-riverpod',
-                ),
-                SizedBox(height: 8),
-                LinkText(
-                  text: 'All I Know about AnimationController',
-                  url:
-                      'https://chooyan.hashnode.dev/all-i-know-about-animationcontroller',
                 ),
                 SizedBox(height: 8),
                 LinkText(
