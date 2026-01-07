@@ -256,20 +256,20 @@ class _Videos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const video1 = _VideoItem(
-      videoId: 'zJpnP6gG3T8',
-      title: 'Maximizing the Power of the Widget Tree',
-    );
-    const video2 = _VideoItem(
-      videoId: 'Xitie4TrnPo',
-      title: '体験！マクロ時代のFlutterアプリ開発 (Japanese)',
-    );
-    const video3 = _VideoItem(
       videoId: '1-IBajfcu1U',
       title: 'AnimatedTo: A Game Changer for Your Moving Animations',
     );
-    const video4 = _VideoItem(
+    const video2 = _VideoItem(
       videoId: '2pb-fNof-7M',
       title: 'RenderObject とは何か？animated_to に学ぶレイアウト計算と描画の仕組み',
+    );
+    const video3 = _VideoItem(
+      videoId: 'zJpnP6gG3T8',
+      title: 'Maximizing the Power of the Widget Tree',
+    );
+    const video4 = _VideoItem(
+      videoId: 'Xitie4TrnPo',
+      title: '体験！マクロ時代のFlutterアプリ開発 (Japanese)',
     );
     return Column(
       children: [
